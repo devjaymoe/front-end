@@ -1,21 +1,22 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import * as serviceWorker from "./serviceWorker";
 // Redux Store
-import { createStore, applyMiddleware } from 'redux';
-import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from "redux";
+import { Provider } from "react-redux";
 // Middleware and root reducer from store
-import rootReducer from './store/reducers';
-import thunk from 'redux-thunk';
-import logger from 'redux-logger';
+import rootReducer from "./store/reducers";
+import thunk from "redux-thunk";
+import logger from "redux-logger";
 // React Router
-import { BrowserRouter as Router, withRouter } from 'react-router-dom';
+import { BrowserRouter as Router, withRouter } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
 // Router consumer variable
-const AppWithRouter = withRouter(App)
+const AppWithRouter = withRouter(App);
 // Store Variable with middleware
-const store = createStore(rootReducer, applyMiddleware(thunk, logger))
+const store = createStore(rootReducer, applyMiddleware(thunk, logger));
 
 ReactDOM.render(
   <React.StrictMode>
@@ -25,7 +26,7 @@ ReactDOM.render(
       </Router>
     </Provider>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change
