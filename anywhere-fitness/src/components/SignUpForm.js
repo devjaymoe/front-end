@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import Login from "../images/Login background.png";
 import { connect } from 'react-redux';
 import { signUpFetch } from '../store/actions';
 
-const SignUp = (props) => {
+const SignUp = props => {
   const [credentials, setCredentials] = useState({
     username: "",
     email: "",
@@ -28,16 +27,19 @@ const SignUp = (props) => {
       });
     }
   };
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault();
     // redux action for sign up
     // performs axios call
-    props.signUpFetch(credentials);
+    await props.signUpFetch(credentials);
     setCredentials({
       username: "",
       email: "",
       password: "",
     })
+    if(props.success){
+      props.history.push('/')
+    }
   };
   return (
     <div className="signUpContainer">
