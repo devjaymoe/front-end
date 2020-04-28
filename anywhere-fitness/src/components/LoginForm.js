@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
+import { Button, Form, FormGroup, Label, Input } from "reactstrap";
+import Login from "../images/Login background.png";
 
 const LoginForm = (props) => {
   const [credentials, setCredentials] = useState({
@@ -30,27 +31,39 @@ const LoginForm = (props) => {
   };
 
   return (
-    <Form onSubmit={submit}>
-      <FormGroup>
-        <Label htmlFor="username">Username</Label>
-        <Input
-          id="username"
-          type="text"
-          name="username"
-          onChange={handleChange}
-        />
-      </FormGroup>
-      <FormGroup>
-        <Label htmlFor="password">Password</Label>
-        <Input
-          id="password"
-          type="password"
-          name="password"
-          onChange={handleChange}
-        />
-      </FormGroup>
-      <Button>Confirm</Button>
-    </Form>
+    <div className="signUpContainer">
+      <div className="signUpImage mx-auto">
+        <img src={Login} alt="Woman practicing yoga" className="w-100"></img>
+      </div>
+      <div className="signUpFormContainer">
+        <div className="signUpForm mx-auto">
+          <h1 className="font-weight-bold mb-5">Sign In</h1>
+          <Form onSubmit={submit}>
+            <FormGroup>
+              <Label htmlFor="username">Username</Label>
+              <Input
+                id="username"
+                type="text"
+                name="username"
+                value={credentials.username}
+                onChange={handleChange}
+                required
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label htmlFor="password">Password</Label>
+              <Input
+                id="password"
+                type="password"
+                name="password"
+                onChange={handleChange}
+              />
+            </FormGroup>
+            <Button className="w-25">Confirm</Button>
+          </Form>
+        </div>
+      </div>
+    </div>
   );
 };
 

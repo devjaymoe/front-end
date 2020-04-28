@@ -1,0 +1,28 @@
+//Sign Up & Login Page Styling
+$mobile: 500px; //Mobile Screen Size
+
+.signUpContainer {
+  display: flex;
+
+  .signUpImage {
+    width: 50%;
+
+    @media (max-width: $mobile) {
+      display: none;
+    }
+  }
+  .signUpFormContainer {
+    padding-top: 110px !important;
+    width: 50%;
+
+    @media (max-width: $mobile) {
+      width: 100%;
+      padding-top: 40px !important;
+    }
+  }
+
+  .signUpForm {
+    margin-top: 80px;
+    width: 80% !important;
+  }
+}
