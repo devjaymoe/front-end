@@ -1,9 +1,12 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import Login from "../images/Login background.png";
+import { connect } from 'react-redux';
+import { signUpFetch } from '../store/actions';
+import { useHistory } from 'react-router-dom'
 
-const SignUp = (props) => {
+const SignUp = props => {
+  const { push } = useHistory();
   const [credentials, setCredentials] = useState({
     username: "",
     email: "",
@@ -27,29 +30,24 @@ const SignUp = (props) => {
     }
   };
   const submit = async (e) => {
-    console.log("submit", "<<<submit data");
     e.preventDefault();
-    axios
-      .post(
-        "https://anywherefitness-api.herokuapp.com/auth/register",
-        credentials
-      )
-      .then((res) => {
-        // console.log(res);
-        setCredentials({
-          username: "",
-          email: "",
-          password: "",
-          roles: [],
-        });
-      })
-      .catch((err) => console.log({ err }));
+    // redux action for sign up
+    // performs axios call
+    await props.signUpFetch(credentials);
+    setCredentials({
+      username: "",
+      email: "",
+      password: "",
+    })
+    push('/')
   };
   return (
     <div className="signUpContainer">
+
       <div className="signUpImage mx-auto">
         <img src={Login} alt="Woman practicing yoga" className="w-100"></img>
       </div>
+
       <div className="signUpFormContainer">
         <div className="signUpForm mx-auto">
           <h1 className="font-weight-bold mb-5">Sign Up</h1>
@@ -118,12 +116,22 @@ const SignUp = (props) => {
                 </Label>
               </FormGroup>
             </FormGroup>
+            <Button className="w-25">Confirm</Button>
           </Form>
-          <Button className="w-25">Confirm</Button>
+          {props.error ? <p>{props.error}</p> : null}
+          {props.success ? <p>{props.success}</p>: null}
         </div>
       </div>
     </div>
   );
 };
 
-export default SignUp;
+const mapStateToProps = state => {
+  return {
+    success: state.signUp.success,
+    isFetching: state.signUp.isFetching,
+    error: state.signUp.error
+  }
+}
+
+export default connect(mapStateToProps, { signUpFetch })(SignUp);
