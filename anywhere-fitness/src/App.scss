@@ -1,6 +1,13 @@
-//Sign Up & Login Page Styling
 $mobile: 500px; //Mobile Screen Size
+$orange: #ff9233;
+$black: #000;
+$white: #fff;
 
+body {
+  font-size: 62.5%;
+}
+
+//Sign Up & Login Page Styling
 .signUpContainer {
   display: flex;
 
@@ -12,7 +19,7 @@ $mobile: 500px; //Mobile Screen Size
     }
   }
   .signUpFormContainer {
-    padding-top: 110px !important;
+    padding-top: 100px !important;
     width: 50%;
 
     @media (max-width: $mobile) {
@@ -24,5 +31,107 @@ $mobile: 500px; //Mobile Screen Size
   .signUpForm {
     margin-top: 80px;
     width: 80% !important;
+  }
+}
+
+// Navigation styling - Forms
+// .navigation {
+//   text-align: center;
+//   background-color: #ff9233;
+//   padding: 10px;
+//   font-weight: 700;
+//   font-size: 1.5rem;
+
+//   a {
+//     color: black;
+//   }
+
+//   a:hover {
+//     text-decoration: none;
+//     color: black;
+//   }
+// }
+
+// Navigation Styling - Site
+nav {
+  .navSite {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: $white;
+    padding: 20px 30px;
+    font-weight: 700;
+    font-size: 1.2rem;
+
+    a {
+      color: $black;
+    }
+
+    a:hover {
+      text-decoration: none;
+      color: $orange;
+    }
+
+    @media (max-width: $mobile) {
+      flex-direction: column;
+      text-align: center;
+
+      h1 {
+        font-size: 2rem;
+        margin: 20px 0px 15px 0px;
+      }
+    }
+  }
+
+  //Lower Navbar Instructor
+  .navLinksInstructor {
+    background-color: $orange;
+    padding: 10px 30px;
+
+    a {
+      color: $black;
+      margin-right: 60px;
+    }
+
+    a:hover {
+      text-decoration: none;
+      color: $white;
+    }
+
+    @media (max-width: $mobile) {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+
+      a {
+        margin: 5px 0px;
+      }
+    }
+  }
+
+  //Lower Navbar Instructor
+  .navLinksUser {
+    background-color: $orange;
+    padding: 10px 30px;
+
+    a {
+      color: $black;
+      margin-right: 60px;
+    }
+
+    a:hover {
+      text-decoration: none;
+      color: $white;
+    }
+
+    @media (max-width: $mobile) {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+
+      a {
+        margin: 5px 0px;
+      }
+    }
   }
 }
