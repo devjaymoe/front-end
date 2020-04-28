@@ -1,4 +1,5 @@
 import axios from 'axios';
+// import { axiosWithAuth } from '../../utils/axiosWithAuth';
 
 export const FETCH_START = 'FETCH_START';
 export const FETCH_SUCCESS = 'FETCH_SUCCESS';
@@ -22,3 +23,20 @@ export const signUpFetch = userInfo => dispatch => {
 }
 
 // { headers: {"" : ""} }
+
+export const LOGIN_START = 'LOGIN_START';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_FAILURE = 'LOGIN_FAILURE';
+
+export const loginFetch = userInfo => dispatch => {
+    dispatch({ type: LOGIN_START });
+    axios
+        .post(`https://anywherefitness-api.herokuapp.com/auth/login`, userInfo)
+        .then(res =>{
+            dispatch({ type: LOGIN_SUCCESS, payload: res.data.token})
+        })
+        .catch( error => {
+            console.log({error})
+            dispatch({ type: LOGIN_FAILURE, payload: error })
+        })
+}

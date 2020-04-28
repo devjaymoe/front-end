@@ -3,8 +3,10 @@ import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import Login from "../images/Login background.png";
 import { connect } from 'react-redux';
 import { signUpFetch } from '../store/actions';
+import { useHistory } from 'react-router-dom'
 
 const SignUp = props => {
+  const { push } = useHistory();
   const [credentials, setCredentials] = useState({
     username: "",
     email: "",
@@ -37,9 +39,7 @@ const SignUp = props => {
       email: "",
       password: "",
     })
-    if(props.success){
-      props.history.push('/')
-    }
+    push('/')
   };
   return (
     <div className="signUpContainer">
@@ -134,4 +134,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, {signUpFetch})(SignUp);
+export default connect(mapStateToProps, { signUpFetch })(SignUp);
