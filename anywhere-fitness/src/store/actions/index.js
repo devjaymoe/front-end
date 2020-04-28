@@ -12,11 +12,9 @@ export const signUpFetch = userInfo => dispatch => {
         .post(`https://anywherefitness-api.herokuapp.com/auth/register`, userInfo)
         .then( res => {
             // fetch request success and dispatch action
-            // console.log(res)
             dispatch({ type: FETCH_SUCCESS, payload: res.data.message })
         })
         .catch( error => {
-            // console.log('error: ', error) dispatch err
             const errorObject = {error}
             const message = errorObject.error.response.data.detail
             dispatch({ type: FETCH_FAILURE, payload: message })

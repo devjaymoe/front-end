@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import Login from "../images/Login background.png";
+import { connect } from 'react-redux';
+import { signUpFetch } from '../store/actions';
 
 const SignUp = (props) => {
   const [credentials, setCredentials] = useState({
@@ -28,21 +30,14 @@ const SignUp = (props) => {
   };
   const submit = (e) => {
     e.preventDefault();
-    axios
-      .post(
-        "https://anywherefitness-api.herokuapp.com/auth/register",
-        credentials
-      )
-      .then((res) => {
-        console.log(res);
-        setCredentials({
-          username: "",
-          email: "",
-          password: "",
-          roles: [],
-        });
-      })
-      .catch((err) => console.log( {err} ));
+    // redux action for sign up
+    // performs axios call
+    props.signUpFetch(credentials);
+    setCredentials({
+      username: "",
+      email: "",
+      password: "",
+    })
   };
   return (
     <div className="signUpContainer">
@@ -121,10 +116,20 @@ const SignUp = (props) => {
             </FormGroup>
             <Button className="w-25">Confirm</Button>
           </Form>
+          {props.error ? <p>{props.error}</p> : null}
+          {props.success ? <p>{props.success}</p>: null}
         </div>
       </div>
     </div>
   );
 };
 
-export default SignUp;
+const mapStateToProps = state => {
+  return {
+    success: state.signUp.success,
+    isFetching: state.signUp.isFetching,
+    error: state.signUp.error
+  }
+}
+
+export default connect(mapStateToProps, {signUpFetch})(SignUp);
