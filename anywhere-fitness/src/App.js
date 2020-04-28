@@ -6,6 +6,7 @@ import Navigation from "./components/Navigation";
 import SignUpForm from "./components/SignUpForm";
 import LoginForm from "./components/LoginForm";
 import Classes from "./components/Classes";
+import CreateClass from "./components/CreateClass";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path='/classes' component={Classes} />
         <Route path="/register" component={SignUpForm} />
         <Route exact path="/" component={LoginForm} />
+        <Route path="/createclass" component={CreateClass} />
       </Switch>
     </div>
   );
