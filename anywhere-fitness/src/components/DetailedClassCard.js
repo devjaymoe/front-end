@@ -2,7 +2,7 @@ import React from "react";
 
 const DetailedClasses = (props) => {
   return (
-    <div className="class-card">
+    <div className="classDetails">
       <h2>{props.data.name}</h2>
       <div>
         <p>Time: {props.data.time}</p>
@@ -33,9 +33,6 @@ const DetailedClasses = (props) => {
       </div>
       <div>
         <p>Upon arrival: {props.data.arrivalDescription}</p>
-      </div>
-      <div>
-        <p>Additional Info: {props.data.additionalInfo}</p>
       </div>
       <div>
         <p>Additional Info: {props.data.additionalInfo}</p>
