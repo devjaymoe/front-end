@@ -26,8 +26,7 @@ const SignUp = (props) => {
       });
     }
   };
-  const submit = async (e) => {
-    console.log("submit", "<<<submit data");
+  const submit = (e) => {
     e.preventDefault();
     axios
       .post(
@@ -35,7 +34,7 @@ const SignUp = (props) => {
         credentials
       )
       .then((res) => {
-        // console.log(res);
+        console.log(res);
         setCredentials({
           username: "",
           email: "",
@@ -43,13 +42,15 @@ const SignUp = (props) => {
           roles: [],
         });
       })
-      .catch((err) => console.log({ err }));
+      .catch((err) => console.log( {err} ));
   };
   return (
     <div className="signUpContainer">
+
       <div className="signUpImage mx-auto">
         <img src={Login} alt="Woman practicing yoga" className="w-100"></img>
       </div>
+
       <div className="signUpFormContainer">
         <div className="signUpForm mx-auto">
           <h1 className="font-weight-bold mb-5">Sign Up</h1>
@@ -118,8 +119,8 @@ const SignUp = (props) => {
                 </Label>
               </FormGroup>
             </FormGroup>
+            <Button className="w-25">Confirm</Button>
           </Form>
-          <Button className="w-25">Confirm</Button>
         </div>
       </div>
     </div>

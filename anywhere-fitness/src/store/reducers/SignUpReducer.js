@@ -5,7 +5,7 @@ import {
 } from '../actions'
 
 const initialState = {
-  data: '',
+  success: '',
   isFetching: false,
   error: ''
 };
@@ -22,13 +22,14 @@ export const signUpReducer = ( state = initialState, action) => {
             return {
                 ...state,
                 isFetching: false,
-                img: action.payload,
+                success: action.payload,
                 error: ''
             };
         case FETCH_FAILURE:
             // console.log(action.payload)
             return {
                 ...state,
+                success: '',
                 isFetching: false,
                 error: action.payload
             };
