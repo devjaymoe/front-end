@@ -61,7 +61,7 @@ const CreateClass = (props) => {
       <form onSubmit={submit}>
         <label htmlFor="name">
           Class Name
-          <Input
+          <input
             id="name"
             type="text"
             name="name"
@@ -73,9 +73,8 @@ const CreateClass = (props) => {
 
         <label htmlFor="description">
           Class description
-          <Input
+          <textarea
             id="description"
-            type="text"
             name="description"
             value={createClass.description}
             onChange={handleChange}
@@ -85,7 +84,7 @@ const CreateClass = (props) => {
 
         <label htmlFor="cost">
           Class cost in US dollars
-          <Input
+          <input
             id="cost"
             type="text"
             name="cost"
@@ -95,15 +94,124 @@ const CreateClass = (props) => {
           />
         </label>
 
-        <label htmlFor="cost">
-          Class cost in US dollars
-          <Input
-            id="cost"
+        <label htmlFor="equiptmentRequired">
+          Class equipment requirements
+          <textarea
+            id="equiptmentRequired"
+            name="equiptmentRequired"
+            value={createClass.equiptmentRequired}
+            onChange={handleChange}
+          />
+        </label>
+
+        <label htmlFor="address">
+          Class address
+          <input
+            id="address"
             type="text"
-            name="cost"
-            value={createClass.cost}
+            name="address"
+            value={createClass.address}
             onChange={handleChange}
             required
+          />
+        </label>
+
+        <label htmlFor="classType">
+          Class Type
+          <select
+            id="classType"
+            name="classType"
+            onChange={handleChange}
+            required
+          >
+            <option value="1">Pilates</option>
+            <option value="2">Boxing</option>
+            <option value="3">Running</option>
+            <option value="4">Lifting</option>
+            <option value="5">Hot Yoga</option>
+          </select>
+        </label>
+
+        <label htmlFor="maxSize">
+          Maximum class size
+          <input
+            id="maxSize"
+            type="text"
+            name="maxSize"
+            value={createClass.maxSize}
+            onChange={handleChange}
+            required
+          />
+        </label>
+
+        <label htmlFor="duration">
+          Class duration in hours
+          <input
+            id="duration"
+            type="text"
+            name="duration"
+            value={createClass.duration}
+            onChange={handleChange}
+            required
+          />
+        </label>
+
+        <label htmlFor="intensity">
+          Class intensity level
+          <select
+            id="intensity"
+            name="intensity"
+            onChange={handleChange}
+            required
+          >
+            <option value="beginner">Beginner</option>
+            <option value="intermediate">Intermediate</option>
+            <option value="expert">Expert</option>
+          </select>
+        </label>
+
+        <label htmlFor="arrivalDescription">
+          When you arrive
+          <input
+            id="arrivalDescription"
+            type="text"
+            name="arrivalDescription"
+            value={createClass.arrivalDescription}
+            onChange={handleChange}
+          />
+        </label>
+
+        <label htmlFor="additionalInfo">
+          What you need to know
+          <input
+            id="additionalInfo"
+            type="text"
+            name="additionalInfo"
+            value={createClass.additionalInfo}
+            onChange={handleChange}
+          />
+        </label>
+
+        <label htmlFor="time">
+          Class time
+          <input
+            id="time"
+            type="time"
+            name="time"
+            value={createClass.time}
+            onChange={handleChange}
+            required
+          />
+        </label>
+
+        <label htmlFor="startDate">
+          Class date
+          <input
+            id="startDate"
+            type="date"
+            name="startDate"
+            value={createClass.startDate}
+            onChange={handleChange}
           />
         </label>
       </form>
