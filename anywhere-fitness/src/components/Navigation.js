@@ -5,10 +5,15 @@ const Navigation = (props) => {
   return (
     <nav>
       <div className="navigation navSite">
-        <NavLink to="/">
-          <h1>Anywhere Fitness</h1>
-        </NavLink>
-        <NavLink to="/About">About</NavLink>
+        <div>
+          <NavLink to="/">
+            <h1>Anywhere Fitness</h1>
+          </NavLink>
+        </div>
+        <div>
+          <NavLink to="/About">About</NavLink>
+          <NavLink to="/register">Register</NavLink>
+        </div>
       </div>
 
       <div className="navLinksInstructor">

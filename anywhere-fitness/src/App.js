@@ -5,7 +5,7 @@ import PrivateRoute from './components/PrivateRoute';
 import Navigation from "./components/Navigation";
 import SignUpForm from "./components/SignUpForm";
 import LoginForm from "./components/LoginForm";
-import Classes from './components/Classes';
+import Classes from "./components/Classes";
 
 function App() {
   return (
