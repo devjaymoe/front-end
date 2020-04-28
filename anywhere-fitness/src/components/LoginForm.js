@@ -10,6 +10,7 @@ const LoginForm = (props) => {
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
+    role: ''
   });
 
   const handleChange = (e) => {
@@ -19,9 +20,9 @@ const LoginForm = (props) => {
     });
   };
   //console.log(props.success)
-  const submit = async (e) => {
+  const submit = (e) => {
     e.preventDefault();
-    await props.loginFetch(credentials)
+    props.loginFetch(credentials)
     setCredentials({
       username: "",
       password: ""
@@ -57,6 +58,32 @@ const LoginForm = (props) => {
                 name="password"
                 onChange={handleChange}
               />
+            </FormGroup>
+            <FormGroup tag="fieldset">
+              <FormGroup check>
+                <Label check>
+                  <Input
+                    type="radio"
+                    id="client"
+                    name="role"
+                    value="client"
+                    onChange={handleChange}
+                  />{" "}
+                  I'm a client.
+                </Label>
+              </FormGroup>
+              <FormGroup check>
+                <Label check>
+                  <Input
+                    type="radio"
+                    id="instructor"
+                    name="role"
+                    value="instructor"
+                    onChange={handleChange}
+                  />{" "}
+                  I'm an instructor.
+                </Label>
+              </FormGroup>
             </FormGroup>
             <Button className="w-25">Confirm</Button>
           </Form>
