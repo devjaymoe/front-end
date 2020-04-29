@@ -58,7 +58,7 @@ const LoginForm = (props) => {
                 name="password"
                 onChange={handleChange}
                 required
-                minlength="8"
+                minLength="8"
               />
             </FormGroup>
             <FormGroup tag="fieldset">

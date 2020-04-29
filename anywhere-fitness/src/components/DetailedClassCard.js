@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { useParams, Link } from 'react-router-dom'
-import { connect } from 'react-redux';
+import { useParams, Link } from "react-router-dom";
+import { connect } from "react-redux";
 
 const DetailedClasses = (props) => {
-  const [ classDetail, setClassDetail ] = useState('')
+  const [classDetail, setClassDetail] = useState("");
   const params = useParams();
 
-  useEffect(()=>{
-    const [ filter ] = props.classes.filter(classObj => classObj.id == params.id)
-    setClassDetail(filter) 
-  }, [params.id])
+  useEffect(() => {
+    const [filter] = props.classes.filter(
+      (classObj) => classObj.id == params.id
+    );
+    setClassDetail(filter);
+  }, [params.id]);
 
   if (!classDetail) {
-    return <div>Loading class information...</div>
+    return <div>Loading class information...</div>;
   }
 
   return (
@@ -31,7 +33,7 @@ const DetailedClasses = (props) => {
         <p>Class starting: {classDetail.startDate}</p>
       </div>
       <div>
-        <p>Cost of class: {classDetail.cost}</p>
+        <p>Cost of class: ${classDetail.cost}</p>
       </div>
       <div>
         <p>Duration: {classDetail.duration}</p>
@@ -51,18 +53,15 @@ const DetailedClasses = (props) => {
       <div>
         <p>Additional Info: {classDetail.additionalInfo}</p>
       </div>
-      <Link to='/classes'>
-        Back to class list
-      </Link>
+      <Link to="/classes">Back to class list</Link>
     </div>
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    classes: state.classes.classes
-  }
-}
+    classes: state.classes.classes,
+  };
+};
 
-
-export default connect(mapStateToProps, null )(DetailedClasses);
+export default connect(mapStateToProps, null)(DetailedClasses);
