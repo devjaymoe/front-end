@@ -11,11 +11,10 @@ const DetailedClasses = (props) => {
     setClassDetail(filter) 
   }, [params.id])
 
-  // console.log('filtered: ', classDetail, 'params.id: ',params.id, 'redux classes',props.classes)
   if (!classDetail) {
     return <div>Loading class information...</div>
   }
-  console.log(classDetail)
+
   return (
     <div className="classDetails">
       <h2>{classDetail.name}</h2>
