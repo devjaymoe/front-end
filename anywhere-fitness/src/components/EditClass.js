@@ -248,8 +248,7 @@ const EditClass = (props) => {
             required
           />
         </label>
-        <button>Submit</button>
-        
+        <button>Submit</button> 
       </form>
     </div>
   );
