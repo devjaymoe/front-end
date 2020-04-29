@@ -83,6 +83,7 @@ const SignUp = (props) => {
                 value={credentials.password}
                 onChange={handleChange}
                 required
+                minlength="8"
               />
             </FormGroup>
 
