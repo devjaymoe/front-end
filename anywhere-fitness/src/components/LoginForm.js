@@ -1,26 +1,16 @@
 import React, { useState } from "react";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import Login from "../images/Login background.png";
-<<<<<<< HEAD
 import { connect } from "react-redux";
 import { loginFetch } from "../store/actions";
 import { useHistory } from "react-router-dom";
-=======
-import { connect } from 'react-redux';
-import { loginFetch } from '../store/actions';
-import { useHistory } from 'react-router-dom';
->>>>>>> 2bea032ea72edb66bd7b98b3267501379ee81e7a
 
 const LoginForm = (props) => {
   const { push } = useHistory();
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
-<<<<<<< HEAD
     role: "",
-=======
-    role: ''
->>>>>>> 2bea032ea72edb66bd7b98b3267501379ee81e7a
   });
 
   const handleChange = (e) => {
@@ -32,21 +22,12 @@ const LoginForm = (props) => {
   //console.log(props.success)
   const submit = (e) => {
     e.preventDefault();
-<<<<<<< HEAD
     props.loginFetch(credentials);
     setCredentials({
       username: "",
       password: "",
     });
     push("/classes");
-=======
-    props.loginFetch(credentials)
-    setCredentials({
-      username: "",
-      password: ""
-    })
-    push('/classes')
->>>>>>> 2bea032ea72edb66bd7b98b3267501379ee81e7a
   };
 
   return (
@@ -76,6 +57,7 @@ const LoginForm = (props) => {
                 type="password"
                 name="password"
                 onChange={handleChange}
+                required
               />
             </FormGroup>
             <FormGroup tag="fieldset">
@@ -87,6 +69,7 @@ const LoginForm = (props) => {
                     name="role"
                     value="client"
                     onChange={handleChange}
+                    required
                   />{" "}
                   I'm a client.
                 </Label>
@@ -112,23 +95,13 @@ const LoginForm = (props) => {
   );
 };
 
-<<<<<<< HEAD
 const mapStateToProps = (state) => {
-=======
-const mapStateToProps = state => {
->>>>>>> 2bea032ea72edb66bd7b98b3267501379ee81e7a
   return {
     success: state.login.success,
     isFetching: state.login.isFetching,
     error: state.login.error,
-<<<<<<< HEAD
     token: state.login.token,
   };
 };
-=======
-    token: state.login.token
-  }
-}
->>>>>>> 2bea032ea72edb66bd7b98b3267501379ee81e7a
 
 export default connect(mapStateToProps, { loginFetch })(LoginForm);
