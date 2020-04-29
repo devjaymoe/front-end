@@ -1,55 +1,66 @@
 import React, { useState } from "react";
-import axios from "axios";
+import { axiosWithAuth } from "../utils/axiosWithAuth";
+import { connect } from 'react-redux';
 
 const CreateClass = (props) => {
   const [createClass, setCreateClass] = useState({
-    id: "",
     name: "",
     time: "",
-    duration: "",
+    duration: '', // float
     intensity: "",
     location: "",
-    maxSize: "",
-    classType: "",
-    imgUrl: "",
-    equiptmentRequired: "",
-    arrivalDescription: "",
-    additionalInfo: "",
-    cost: "",
-    description: "",
+    maxSize: '', //int
+    classType: '', // id from database
+    imgUrl: '', // selected id from database
+    cost: '', // float
+    courseDescription: "",
     address: "",
     startDate: "",
+    instructor: '', // instructor id
+    days: [] // array of day strings
   });
 
   const handleChange = (e) => {
+    let value = e.target.value;
+    if (e.target.name === 'duration' || e.target.name === 'cost') {
+        value = parseFloat(value)
+    }
+    if (   e.target.name === 'maxSize' 
+        || e.target.name === 'classType' 
+        || e.target.name === 'imgUrl') {
+        value = parseInt(value)
+    }
+    if ( e.target.name === 'days'){
+        value = value.trim()
+        value = value.split(',')
+    }
     setCreateClass({
       ...createClass,
-      [e.target.name]: e.target.value,
+      [e.target.name]: value,
     });
   };
 
-  const submit = async (e) => {
+  const submit = (e) => {
     e.preventDefault();
-    axios
-      .post("https://anywherefitness-api.herokuapp.com/classes", createClass)
+    axiosWithAuth(props.token)
+      .post("classes", createClass)
       .then((res) => {
+        console.log(res)
         setCreateClass({
-          id: Date.now(),
           name: "",
           time: "",
-          duration: "",
+          duration: "", // float/double
           intensity: "",
           location: "",
-          maxSize: "",
-          classType: "",
-          imgUrl: "",
-          equiptmentRequired: "",
-          arrivalDescription: "",
-          additionalInfo: "",
+          maxSize: "", //int
+          classType: "", // id from database
+          imgUrl: "", // selected id from database
           cost: "",
-          description: "",
+          courseDescription: "",
           address: "",
           startDate: "",
+          instructor: props.user.id, // instructor id
+          days: [] // array of day strings
         });
       })
       .catch((err) => console.log({ err }));
@@ -71,84 +82,23 @@ const CreateClass = (props) => {
           />
         </label>
 
-        <label htmlFor="description">
-          Class description
-          <textarea
-            id="description"
-            name="description"
-            value={createClass.description}
-            onChange={handleChange}
-            required
-          />
-        </label>
-
-        <label htmlFor="cost">
-          Class cost in US dollars
+        <label htmlFor="time">
+          Class Time
           <input
-            id="cost"
-            type="text"
-            name="cost"
-            value={createClass.cost}
-            onChange={handleChange}
-            required
-          />
-        </label>
-
-        <label htmlFor="equiptmentRequired">
-          Class equipment requirements
-          <textarea
-            id="equiptmentRequired"
-            name="equiptmentRequired"
-            value={createClass.equiptmentRequired}
-            onChange={handleChange}
-          />
-        </label>
-
-        <label htmlFor="address">
-          Class address
-          <input
-            id="address"
-            type="text"
-            name="address"
-            value={createClass.address}
-            onChange={handleChange}
-            required
-          />
-        </label>
-
-        <label htmlFor="classType">
-          Class Type
-          <select
-            id="classType"
-            name="classType"
-            onChange={handleChange}
-            required
-          >
-            <option value="1">Pilates</option>
-            <option value="2">Boxing</option>
-            <option value="3">Running</option>
-            <option value="4">Lifting</option>
-            <option value="5">Hot Yoga</option>
-          </select>
-        </label>
-
-        <label htmlFor="maxSize">
-          Maximum class size
-          <input
-            id="maxSize"
-            type="text"
-            name="maxSize"
-            value={createClass.maxSize}
+            id="time"
+            type='datetime-local'
+            name="time"
+            value={createClass.time}
             onChange={handleChange}
             required
           />
         </label>
 
         <label htmlFor="duration">
-          Class duration in hours
+          Class Duration
           <input
             id="duration"
-            type="text"
+            type="number"
             name="duration"
             value={createClass.duration}
             onChange={handleChange}
@@ -164,59 +114,138 @@ const CreateClass = (props) => {
             onChange={handleChange}
             required
           >
-            <option value="beginner">Beginner</option>
-            <option value="intermediate">Intermediate</option>
-            <option value="expert">Expert</option>
+            <option value='Beginner'>Beginner</option>
+            <option value='Intermediate'>Intermediate</option>
+            <option value='Expert'>Expert</option>
           </select>
         </label>
 
-        <label htmlFor="arrivalDescription">
-          When you arrive
+        <label htmlFor="location">
+          Class Location
           <input
-            id="arrivalDescription"
-            type="text"
-            name="arrivalDescription"
-            value={createClass.arrivalDescription}
+            id="location"
+            name="location"
+            type='text'
+            value={createClass.location}
             onChange={handleChange}
           />
         </label>
 
-        <label htmlFor="additionalInfo">
-          What you need to know
+        <label htmlFor="maxSize">
+          Maximum class size
           <input
-            id="additionalInfo"
-            type="text"
-            name="additionalInfo"
-            value={createClass.additionalInfo}
+            id="maxSize"
+            type="number"
+            name="maxSize"
+            value={createClass.maxSize}
             onChange={handleChange}
+            required
           />
         </label>
 
-        <label htmlFor="time">
-          Class time
+        <label htmlFor="classType">
+          Class Type
+          <select
+            id="classType"
+            name="classType"
+            onChange={handleChange}
+            required
+          >
+            <option value={1}>Pilates</option>
+            <option value={2}>Boxing</option>
+            <option value={3}>Running</option>
+            <option value={4}>Lifting</option>
+            <option value={5}>Hot Yoga</option>
+          </select>
+        </label>
+
+        <label htmlFor="imgUrl">
+          Class Type
+          <select
+            id="imgUrl"
+            name="imgUrl"
+            onChange={handleChange}
+            required
+          >
+            <option value={1}>Pilates</option>
+            <option value={2}>Boxing</option>
+            <option value={3}>Running</option>
+            <option value={4}>Lifting</option>
+            <option value={5}>Hot Yoga</option>
+          </select>
+        </label>
+
+        <label htmlFor='cost'>
+          Cost
           <input
-            id="time"
-            type="time"
-            name="time"
-            value={createClass.time}
+            id="cost"
+            type="number"
+            name="cost"
+            value={createClass.cost}
+            onChange={handleChange}
+            required
+          />
+        </label>
+
+        <label htmlFor='courseDescription'>
+          Course Description 
+          <input 
+            id="courseDescription"
+            type="text"
+            name="courseDescription"
+            value={createClass.courseDescription}
+            onChange={handleChange}
+            required
+          />
+        </label>
+
+        <label htmlFor="address">
+          Class address
+          <input
+            id="address"
+            type="text"
+            name="address"
+            value={createClass.address}
             onChange={handleChange}
             required
           />
         </label>
 
         <label htmlFor="startDate">
-          Class date
+          Start Date
           <input
             id="startDate"
             type="date"
             name="startDate"
             value={createClass.startDate}
             onChange={handleChange}
+            required
           />
         </label>
+
+        <label htmlFor="days">
+          Enter days of the week
+          <input
+            id="days"
+            type="text"
+            name="days"
+            value={createClass.days}
+            onChange={handleChange}
+            required
+          />
+        </label>
+        
       </form>
     </div>
   );
 };
 
-export default CreateClass;
+const mapStateToProps = state => {
+  return {
+      token: state.login.token,
+      role: state.login.role,
+      user: state.login.user
+  }
+}
+
+export default connect( mapStateToProps, null )( CreateClass );
