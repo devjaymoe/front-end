@@ -12,7 +12,7 @@ function App() {
     <div className="App">
       <Navigation />
       <Switch>
-        <Route path="/classes" component={Classes} />
+        <Route path='/classes' component={Classes} />
         <Route path="/register" component={SignUpForm} />
         <Route exact path="/" component={LoginForm} />
         <Route path="/createclass" component={CreateClass} />
@@ -20,4 +20,5 @@ function App() {
     </div>
   );
 }
+
 export default App;
