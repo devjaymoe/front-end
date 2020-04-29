@@ -17,7 +17,7 @@ const Navigation = (props) => {
       </div>
 
       <div className="navLinksInstructor">
-        <NavLink to="/Profile">Profile</NavLink>
+        <NavLink to="/classes">Classes</NavLink>
         <NavLink to="/Dashboard">Dashboard</NavLink>
         <NavLink to="/CreateClass">Create a class</NavLink>
         <NavLink to="/ManageClass">Manage Classes</NavLink>

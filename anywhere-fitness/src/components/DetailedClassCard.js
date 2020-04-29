@@ -35,7 +35,7 @@ const DetailedClasses = (props) => {
         <p>Time: {classDetail.time}</p>
       </div>
       <div>
-        <p>Class Description: {classDetail.description}</p>
+        <p>Class Description: {classDetail.courseDescription}</p>
       </div>
       <div>
         <p>Location: {classDetail.address}</p>
@@ -64,11 +64,22 @@ const DetailedClasses = (props) => {
       <div>
         <p>Additional Info: {classDetail.additionalInfo}</p>
       </div>
+      <div>
+        <p>Days: {classDetail.days.map(day => (
+            <span>{day} </span>
+        ))}</p>
+      </div>
       <Link to='/classes'>
         Back to class list
       </Link>
       { props.role === 'instructor' ? 
-        <button onClick={deleteClass}>Delete Class</button>
+        <div>
+          <button onClick={deleteClass}>Delete Class</button>
+          <button 
+            onClick={() => push(`/edit-class/${params.id}`)}>
+            Edit Class
+          </button>
+        </div>
         : null }
     </div>
   );
