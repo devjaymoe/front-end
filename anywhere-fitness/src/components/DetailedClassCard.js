@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link, useHistory } from 'react-router-dom'
 import { connect } from 'react-redux';
+import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 const DetailedClasses = (props) => {
   const [ classDetail, setClassDetail ] = useState('')
   const params = useParams();
+  const { push } = useHistory();
 
   useEffect(()=>{
     const [ filter ] = props.classes.filter(classObj => classObj.id == params.id)
@@ -13,6 +15,17 @@ const DetailedClasses = (props) => {
 
   if (!classDetail) {
     return <div>Loading class information...</div>
+  }
+
+  const deleteClass = e =>{
+    e.preventDefault();
+    axiosWithAuth(props.token)
+      .delete(`classes/${params.id}`)
+      .then(res => {
+        console.log(res)
+        push('/classes')
+      })
+      .catch(err => console.log(err));
   }
 
   return (
@@ -54,13 +67,18 @@ const DetailedClasses = (props) => {
       <Link to='/classes'>
         Back to class list
       </Link>
+      { props.role === 'instructor' ? 
+        <button onClick={deleteClass}>Delete Class</button>
+        : null }
     </div>
   );
 };
 
 const mapStateToProps = state => {
   return {
-    classes: state.classes.classes
+    classes: state.classes.classes,
+    token: state.login.token,
+    role: state.login.role
   }
 }
 
