@@ -12,11 +12,14 @@ const CreateClass = (props) => {
     maxSize: '', //int
     classType: '', // id from database
     imgUrl: '', // selected id from database
+    equipmentRequired: '',
+    arrivalDescription: '',
+    additionalInfo: '',
     cost: '', // float
     courseDescription: "",
     address: "",
     startDate: "",
-    instructor: '', // instructor id
+    instructor: props.user.id, // instructor id
     days: [] // array of day strings
   });
 
@@ -43,24 +46,27 @@ const CreateClass = (props) => {
   const submit = (e) => {
     e.preventDefault();
     axiosWithAuth(props.token)
-      .post("classes", createClass)
+      .post("classes/", createClass)
       .then((res) => {
         console.log(res)
         setCreateClass({
-          name: "",
-          time: "",
-          duration: "", // float/double
-          intensity: "",
-          location: "",
-          maxSize: "", //int
-          classType: "", // id from database
-          imgUrl: "", // selected id from database
-          cost: "",
-          courseDescription: "",
-          address: "",
-          startDate: "",
-          instructor: props.user.id, // instructor id
-          days: [] // array of day strings
+            name: "",
+            time: "",
+            duration: '', // float
+            intensity: "",
+            location: "",
+            maxSize: '', //int
+            classType: '', // id from database
+            imgUrl: '', // selected id from database
+            equipmentRequired: '',
+            arrivalDescription: '',
+            additionalInfo: '',
+            cost: '', // float
+            courseDescription: "",
+            address: "",
+            startDate: "",
+            instructor: props.user.id, // instructor id
+            days: [] // array of day strings
         });
       })
       .catch((err) => console.log({ err }));
@@ -160,7 +166,7 @@ const CreateClass = (props) => {
         </label>
 
         <label htmlFor="imgUrl">
-          Class Type
+          Img Selection
           <select
             id="imgUrl"
             name="imgUrl"
@@ -173,6 +179,42 @@ const CreateClass = (props) => {
             <option value={4}>Lifting</option>
             <option value={5}>Hot Yoga</option>
           </select>
+        </label>
+
+        <label htmlFor='equipmentRequired'>
+          Equipment Required 
+          <input 
+            id="equipmentRequired"
+            type="text"
+            name="equipmentRequired"
+            value={createClass.equipmentRequired}
+            onChange={handleChange}
+            required
+          />
+        </label>
+
+        <label htmlFor='arrivalDescription'>
+          Arrival Description
+          <textarea 
+            id="arrivalDescription"
+            type="text"
+            name="arrivalDescription"
+            value={createClass.arrivalDescription}
+            onChange={handleChange}
+            required
+          />
+        </label>
+
+        <label htmlFor='additionalInfo'>
+          Additional Info 
+          <input 
+            id="additionalInfo"
+            type="text"
+            name="additionalInfo"
+            value={createClass.additionalInfo}
+            onChange={handleChange}
+            required
+          />
         </label>
 
         <label htmlFor='cost'>
@@ -234,7 +276,7 @@ const CreateClass = (props) => {
             required
           />
         </label>
-        
+        <button>Submit</button>
       </form>
     </div>
   );
