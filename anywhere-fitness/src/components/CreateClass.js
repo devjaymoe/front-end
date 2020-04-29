@@ -34,7 +34,7 @@ const CreateClass = (props) => {
       .post("https://anywherefitness-api.herokuapp.com/classes", createClass)
       .then((res) => {
         setCreateClass({
-          id: Date.now(),
+          id: "",
           name: "",
           time: "",
           duration: "",
@@ -56,8 +56,8 @@ const CreateClass = (props) => {
   };
 
   return (
-    <div>
-      <h3>Create class</h3>
+    <div className="createContainer">
+      <h3>Create a class</h3>
       <form onSubmit={submit}>
         <label htmlFor="name">
           Class Name
@@ -212,8 +212,10 @@ const CreateClass = (props) => {
             name="startDate"
             value={createClass.startDate}
             onChange={handleChange}
+            required
           />
         </label>
+        <button>Confirm</button>
       </form>
     </div>
   );

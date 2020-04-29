@@ -3,6 +3,9 @@ $orange: #ff9233;
 $black: #000;
 $white: #fff;
 
+@import "CreateClass";
+@import "Reset";
+
 body {
   font-size: 62.5%;
 }
@@ -66,8 +69,11 @@ nav {
     a {
       color: $black;
       margin-left: 40px;
-    }
 
+      @media (max-width: $mobile) {
+        margin: 0px 20px;
+      }
+    }
     a:hover {
       text-decoration: none;
       color: $orange;
