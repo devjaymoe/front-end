@@ -67,14 +67,15 @@ const CreateClass = (props) => {
             startDate: "",
             instructor: props.user.id, // instructor id
             days: [] // array of day strings
+
         });
       })
       .catch((err) => console.log({ err }));
   };
 
   return (
-    <div>
-      <h3>Create class</h3>
+    <div className="createContainer">
+      <h3>Create a class</h3>
       <form onSubmit={submit}>
         <label htmlFor="name">
           Class Name
@@ -277,6 +278,7 @@ const CreateClass = (props) => {
           />
         </label>
         <button>Submit</button>
+
       </form>
     </div>
   );
