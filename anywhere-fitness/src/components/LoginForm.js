@@ -1,12 +1,16 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import Login from "../images/Login background.png";
+import { connect } from "react-redux";
+import { loginFetch } from "../store/actions";
+import { useHistory } from "react-router-dom";
 
 const LoginForm = (props) => {
+  const { push } = useHistory();
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
+    role: "",
   });
 
   const handleChange = (e) => {
@@ -15,19 +19,15 @@ const LoginForm = (props) => {
       [e.target.name]: e.target.value,
     });
   };
-
+  //console.log(props.success)
   const submit = (e) => {
     e.preventDefault();
-    axios
-      .post("https://anywherefitness-api.herokuapp.com/auth/login", credentials)
-      .then((res) => {
-        console.log(res);
-        setCredentials({
-          username: "",
-          password: "",
-        });
-      })
-      .catch((err) => console.log({ err }));
+    props.loginFetch(credentials);
+    setCredentials({
+      username: "",
+      password: "",
+    });
+    push("/classes");
   };
 
   return (
@@ -59,6 +59,32 @@ const LoginForm = (props) => {
                 onChange={handleChange}
               />
             </FormGroup>
+            <FormGroup tag="fieldset">
+              <FormGroup check>
+                <Label check>
+                  <Input
+                    type="radio"
+                    id="client"
+                    name="role"
+                    value="client"
+                    onChange={handleChange}
+                  />{" "}
+                  I'm a client.
+                </Label>
+              </FormGroup>
+              <FormGroup check>
+                <Label check>
+                  <Input
+                    type="radio"
+                    id="instructor"
+                    name="role"
+                    value="instructor"
+                    onChange={handleChange}
+                  />{" "}
+                  I'm an instructor.
+                </Label>
+              </FormGroup>
+            </FormGroup>
             <Button className="w-25">Confirm</Button>
           </Form>
         </div>
@@ -67,4 +93,13 @@ const LoginForm = (props) => {
   );
 };
 
-export default LoginForm;
+const mapStateToProps = (state) => {
+  return {
+    success: state.login.success,
+    isFetching: state.login.isFetching,
+    error: state.login.error,
+    token: state.login.token,
+  };
+};
+
+export default connect(mapStateToProps, { loginFetch })(LoginForm);
