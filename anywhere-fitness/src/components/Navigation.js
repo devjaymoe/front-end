@@ -28,7 +28,7 @@ const Navigation = (props) => {
           <NavLink to="/register">Register</NavLink>
         </div>
       </div>
-
+    
       <div className="navLinksUser">
         <NavLink to="/Profile">Profile</NavLink>
         <NavLink to="/Dashboard">Dashboard</NavLink>

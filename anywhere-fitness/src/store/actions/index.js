@@ -34,7 +34,7 @@ export const loginFetch = userInfo => dispatch => {
     axios
         .post(`https://anywherefitness-api.herokuapp.com/auth/login`, userInfo)
         .then(res =>{
-            // console.log(res.data)
+            console.log(res.data)
             dispatch({ type: LOGIN_SUCCESS, payload: res.data })
         })
         .catch( error => {
