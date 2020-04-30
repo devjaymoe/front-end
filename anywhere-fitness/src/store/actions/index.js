@@ -43,6 +43,12 @@ export const loginFetch = userInfo => dispatch => {
         })
 }
 
+export const LOGOUT = 'LOGOUT';
+
+export const logoutUser = info => dispatch => {
+    dispatch({ type: LOGOUT })
+}
+
 export const GET_CLASSES_START = 'GET_CLASSES_START';
 export const GET_CLASSES_SUCCESS = 'GET_CLASSES_SUCCESS';
 export const GET_CLASSES_FAILURE = 'GET_CLASSES_FAILURE';
