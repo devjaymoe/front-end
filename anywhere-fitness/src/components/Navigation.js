@@ -28,7 +28,7 @@ const Navigation = (props) => {
           <div>
             <span>Greetings, {props.user.displayName}!</span>
             <br></br>
-            <span onClick={logout}>Logout</span>
+            <a onClick={logout}>Logout</a>
           </div>
         )}
       </div>

@@ -67,6 +67,7 @@ nav {
     a:hover {
       text-decoration: none;
       color: $orange;
+      cursor: pointer;
     }
 
     @media (max-width: $mobile) {

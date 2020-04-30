@@ -75,15 +75,23 @@ const DetailedClasses = (props) => {
           ))}
         </p>
       </div>
-      <Link to="/classes">Back to class list</Link>
+      <div className='links'>
+      <button onclick={() => push("/classes")}>Back to class list</button>
       {props.role === "instructor" ? (
-        <div>
-          <button onClick={deleteClass}>Delete Class</button>
-          <button onClick={() => push(`/edit-class/${params.id}`)}>
+        <>
+          <button 
+            className='delete-btn' 
+            onClick={deleteClass}>
+              Delete Class
+          </button>
+          <button 
+            className='edit-btn' 
+            onClick={() => push(`/edit-class/${params.id}`)}>
             Edit Class
           </button>
-        </div>
+        </>
       ) : null}
+      </div>
     </div>
   );
 };
