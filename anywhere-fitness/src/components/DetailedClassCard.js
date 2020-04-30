@@ -4,17 +4,19 @@ import { connect } from 'react-redux';
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 const DetailedClasses = (props) => {
-  const [ classDetail, setClassDetail ] = useState('')
+  const [classDetail, setClassDetail] = useState("");
   const params = useParams();
   const { push } = useHistory();
 
-  useEffect(()=>{
-    const [ filter ] = props.classes.filter(classObj => classObj.id == params.id)
-    setClassDetail(filter) 
-  }, [params.id])
+  useEffect(() => {
+    const [filter] = props.classes.filter(
+      (classObj) => classObj.id == params.id
+    );
+    setClassDetail(filter);
+  }, [params.id]);
 
   if (!classDetail) {
-    return <div>Loading class information...</div>
+    return <div>Loading class information...</div>;
   }
 
   const deleteClass = e =>{
@@ -44,7 +46,7 @@ const DetailedClasses = (props) => {
         <p>Class starting: {classDetail.startDate}</p>
       </div>
       <div>
-        <p>Cost of class: {classDetail.cost}</p>
+        <p>Cost of class: ${classDetail.cost}</p>
       </div>
       <div>
         <p>Duration: {classDetail.duration}</p>
@@ -85,7 +87,7 @@ const DetailedClasses = (props) => {
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     classes: state.classes.classes,
     token: state.login.token,
@@ -93,5 +95,4 @@ const mapStateToProps = state => {
   }
 }
 
-
-export default connect(mapStateToProps, null )(DetailedClasses);
+export default connect(mapStateToProps, null)(DetailedClasses);

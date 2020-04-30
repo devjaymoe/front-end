@@ -5,6 +5,8 @@ $white: #fff;
 
 @import "CreateClass";
 @import "Reset";
+@import "Classes";
+@import "DetailedClassCard";
 
 body {
   font-size: 62.5%;
@@ -91,30 +93,6 @@ nav {
   }
 
   //Lower Navbar Instructor
-  .navLinksInstructor {
-    background-color: $orange;
-    padding: 10px 30px;
-
-    a {
-      color: $black;
-      margin-right: 60px;
-    }
-
-    a:hover {
-      text-decoration: none;
-      color: $white;
-    }
-
-    @media (max-width: $mobile) {
-      display: flex;
-      flex-direction: column;
-      text-align: center;
-
-      a {
-        margin: 5px 0px;
-      }
-    }
-  }
 
   //Lower Navbar User
   .navLinksUser {
@@ -139,6 +117,31 @@ nav {
       a {
         margin: 5px 0px;
       }
+    }
+  }
+}
+
+.navLinksInstructor {
+  background-color: $orange;
+  padding: 10px 30px;
+
+  a {
+    color: $black;
+    margin-right: 60px;
+  }
+
+  a:hover {
+    text-decoration: none;
+    color: $white;
+  }
+
+  @media (max-width: $mobile) {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+    a {
+      margin: 5px 0px;
     }
   }
 }
