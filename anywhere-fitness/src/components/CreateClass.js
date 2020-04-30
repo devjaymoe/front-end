@@ -1,8 +1,11 @@
 import React, { useState } from "react";
-import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { connect } from 'react-redux';
+import { createFetch } from '../store/actions';
+import { useHistory } from 'react-router-dom';
+// import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 const CreateClass = (props) => {
+  const { push } = useHistory();
   const [createClass, setCreateClass] = useState({
     name: "",
     time: "",
@@ -45,32 +48,10 @@ const CreateClass = (props) => {
 
   const submit = (e) => {
     e.preventDefault();
-    axiosWithAuth(props.token)
-      .post("classes/", createClass)
-      .then((res) => {
-        console.log(res)
-        setCreateClass({
-            name: "",
-            time: "",
-            duration: '', // float
-            intensity: "",
-            location: "",
-            maxSize: '', //int
-            classType: '', // id from database
-            imgUrl: '', // selected id from database
-            equipmentRequired: '',
-            arrivalDescription: '',
-            additionalInfo: '',
-            cost: '', // float
-            courseDescription: "",
-            address: "",
-            startDate: "",
-            instructor: props.user.id, // instructor id
-            days: [] // array of day strings
-
-        });
-      })
-      .catch((err) => console.log({ err }));
+    props.createFetch(props.token, createClass)
+    if (!props.isFetching){
+      push('/classes')
+    }
   };
 
   return (
@@ -288,8 +269,9 @@ const mapStateToProps = state => {
   return {
       token: state.login.token,
       role: state.login.role,
-      user: state.login.user
+      user: state.login.user,
+      isFetching: state.create.isFetching
   }
 }
 
-export default connect( mapStateToProps, null )( CreateClass );
+export default connect( mapStateToProps, { createFetch } )( CreateClass );

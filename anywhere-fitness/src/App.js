@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.scss";
 import { Route, Switch } from "react-router-dom";
+import PrivateRoute from './components/PrivateRoute';
 import Navigation from "./components/Navigation";
 import SignUpForm from "./components/SignUpForm";
 import LoginForm from "./components/LoginForm";
@@ -14,8 +15,8 @@ function App() {
     <div className="App">
       <Navigation />
       <Switch>
-        <Route path='/edit-class/:id' component={EditClass} />
-        <Route path="/createclass" component={CreateClass} />
+        <PrivateRoute exact path='/edit-class/:id' component={EditClass} />
+        <PrivateRoute exact path="/createclass" component={CreateClass} />
         <Route path='/class-details/:id' component={DetailedClassCard} />
         <Route path='/classes' component={Classes} />
         <Route path="/register" component={SignUpForm} />
