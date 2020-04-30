@@ -7,12 +7,14 @@ import LoginForm from "./components/LoginForm";
 import Classes from "./components/Classes";
 import CreateClass from "./components/CreateClass";
 import DetailedClassCard from './components/DetailedClassCard';
+import EditClass from './components/EditClass'
 
 function App() {
   return (
     <div className="App">
       <Navigation />
       <Switch>
+        <Route path='/edit-class/:id' component={EditClass} />
         <Route path="/createclass" component={CreateClass} />
         <Route path='/class-details/:id' component={DetailedClassCard} />
         <Route path='/classes' component={Classes} />
