@@ -1,44 +1,38 @@
 import { 
-    GET_CLASSES_START, 
-    GET_CLASSES_SUCCESS,
-    GET_CLASSES_FAILURE,
-    LOGOUT,
+    CREATE_START, 
+    CREATE_SUCCESS,
+    CREATE_FAILURE
 } from '../actions'
 
 const initialState = {
-    classes: [],
+    success: '',
     isFetching: false,
     error: ''
 };
 
-export const classesReducer = ( state = initialState, action) => {
+export const createReducer = ( state = initialState, action ) => {
     switch (action.type) {
-        case GET_CLASSES_START:
+        case CREATE_START:
             return {
                 ...state,
                 isFetching: true
             };
-        case GET_CLASSES_SUCCESS:
+        case CREATE_SUCCESS:
             // console.log('setting classes',action.payload)
             return {
                 ...state,
-                classes: action.payload,
+                success: action.payload,
                 isFetching: false,
                 error: '',
             };
-        case GET_CLASSES_FAILURE:
+        case CREATE_FAILURE:
             // console.log(action.payload)
             return {
                 ...state,
-                classes: [],
+                success: '',
                 isFetching: false,
                 error: action.payload
             };
-        case LOGOUT:
-            return {
-                ...state,
-                classes: []
-            }
         default:
             return state;
     }
