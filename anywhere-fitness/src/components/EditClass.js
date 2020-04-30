@@ -10,6 +10,9 @@ const EditClass = (props) => {
 
   useEffect(()=>{
     const [ filter ] = props.classes.filter(classObj => classObj.id == params.id)
+    delete filter.instructor;
+    delete filter.days;
+    console.log(filter)
     setEditClass(filter) 
   }, [params.id])
 
@@ -68,7 +71,6 @@ const EditClass = (props) => {
             name="time"
             value={editClass.time}
             onChange={handleChange}
-            required
           />
         </label>
 
@@ -80,7 +82,6 @@ const EditClass = (props) => {
             name="duration"
             value={editClass.duration}
             onChange={handleChange}
-            required
           />
         </label>
 
@@ -90,7 +91,6 @@ const EditClass = (props) => {
             id="intensity"
             name="intensity"
             onChange={handleChange}
-            required
           >
             <option value='Beginner'>Beginner</option>
             <option value='Intermediate'>Intermediate</option>
@@ -117,7 +117,6 @@ const EditClass = (props) => {
             name="maxSize"
             value={editClass.maxSize}
             onChange={handleChange}
-            required
           />
         </label>
 
@@ -127,7 +126,6 @@ const EditClass = (props) => {
             id="classType"
             name="classType"
             onChange={handleChange}
-            required
           >
             <option value={1}>Pilates</option>
             <option value={2}>Boxing</option>
@@ -143,7 +141,6 @@ const EditClass = (props) => {
             id="imgUrl"
             name="imgUrl"
             onChange={handleChange}
-            required
           >
             <option value={1}>Pilates</option>
             <option value={2}>Boxing</option>
@@ -161,7 +158,6 @@ const EditClass = (props) => {
             name="equipmentRequired"
             value={editClass.equipmentRequired}
             onChange={handleChange}
-            required
           />
         </label>
 
@@ -173,7 +169,6 @@ const EditClass = (props) => {
             name="arrivalDescription"
             value={editClass.arrivalDescription}
             onChange={handleChange}
-            required
           />
         </label>
 
@@ -185,7 +180,6 @@ const EditClass = (props) => {
             name="additionalInfo"
             value={editClass.additionalInfo}
             onChange={handleChange}
-            required
           />
         </label>
 
@@ -197,7 +191,6 @@ const EditClass = (props) => {
             name="cost"
             value={editClass.cost}
             onChange={handleChange}
-            required
           />
         </label>
 
@@ -209,7 +202,6 @@ const EditClass = (props) => {
             name="courseDescription"
             value={editClass.courseDescription}
             onChange={handleChange}
-            required
           />
         </label>
 
@@ -221,7 +213,6 @@ const EditClass = (props) => {
             name="address"
             value={editClass.address}
             onChange={handleChange}
-            required
           />
         </label>
 
@@ -233,21 +224,9 @@ const EditClass = (props) => {
             name="startDate"
             value={editClass.startDate}
             onChange={handleChange}
-            required
           />
         </label>
 
-        <label htmlFor="days">
-          Enter days of the week
-          <input
-            id="days"
-            type="text"
-            name="days"
-            value={editClass.days}
-            onChange={handleChange}
-            required
-          />
-        </label>
         <button>Submit</button> 
       </form>
     </div>
