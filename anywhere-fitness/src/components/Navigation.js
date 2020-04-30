@@ -1,18 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
+import { connect } from 'react-redux';
+import { logoutUser } from '../store/actions';
+import { useHistory } from "react-router-dom";
 
 const Navigation = (props) => {
-  const [nav, setNav] = useState(true);
-
-  if (!nav) {
-    return (
-      <div className="navLinksInstructor">
-        <NavLink to="/Profile">Profile</NavLink>
-        <NavLink to="/Dashboard">Dashboard</NavLink>
-        <NavLink to="/CreateClass">Create a class</NavLink>
-        <NavLink to="/ManageClass">Manage Classes</NavLink>
-      </div>
-    );
+  const { push } = useHistory();
+  const logout = () =>{
+    props.logoutUser()
+    push('/')
   }
 
   return (
@@ -23,23 +19,43 @@ const Navigation = (props) => {
             <h1>Anywhere Fitness</h1>
           </NavLink>
         </div>
+        { !props.role ?
         <div>
           <NavLink to="/">Login</NavLink>
           <NavLink to="/register">Register</NavLink>
         </div>
+      :
+        <div>
+          <span>Greetings, {props.user.displayName}!</span>
+          <br></br>
+          <span onClick={logout}>Logout</span>
+        </div>
+      }
+        
       </div>
-    
-      <div className="navLinksUser">
-        <NavLink to="/Profile">Profile</NavLink>
-        <NavLink to="/Dashboard">Dashboard</NavLink>
-        <NavLink to="/ClassType">Class Type</NavLink>
-        <NavLink to="/ClassDuration">Class Duration</NavLink>
-        <NavLink to="/ClassDate">Class Date</NavLink>
-        <NavLink to="/ClassTime">Class Time</NavLink>
-        <NavLink to="/ClassLevel">Class Level</NavLink>
-      </div>
+
+      { props.role === 'instructor' ? 
+        <div className="navLinksInstructor">
+          <NavLink to="/Profile">Profile</NavLink>
+          <NavLink to="/classes">Class List</NavLink>
+          <NavLink to="/CreateClass">Create a class</NavLink>
+        </div>
+        :
+        <div className="navLinksUser">
+          <NavLink to="/Profile">Profile</NavLink>
+          <NavLink to="/classes">Class List</NavLink>
+        </div>
+      }
+
     </nav>
   );
 };
 
-export default Navigation;
+const mapStateToProps = state => {
+  return {
+    role: state.login.role,
+    user: state.login.user
+  }
+}
+
+export default connect(mapStateToProps, { logoutUser } )( Navigation );
